@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Pasoans Fighting Hunger</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #1a6b3c;
+      --green-dark: #134f2d;
+      --orange: #e8621a;
+      --orange-dark: #c4521a;
+      --white: #ffffff;
+      --gray-light: #f5f5f5;
+      --gray: #666;
+      --text: #222;
+      --radius: 6px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: var(--text); background: var(--white); }
+
+    /* ── UTILITY BAR ── */
+    .utility-bar {
+      background: var(--green-dark);
+      color: #cde8d7;
+      font-size: 0.82rem;
+      padding: 6px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .utility-bar .contact-info {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .utility-bar a { color: #cde8d7; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+    .utility-bar a:hover { color: var(--white); }
+    .utility-bar .hours { color: #ffcc88; font-weight: 600; }
+
+    /* ── LANGUAGE TOGGLE ── */
+    .lang-toggle {
+      display: flex;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .lang-toggle button {
+      background: none;
+      border: none;
+      color: #cde8d7;
+      padding: 4px 14px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-toggle button.active {
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 20px;
+    }
+    .lang-toggle button:hover:not(.active) { color: var(--white); }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-icon {
+      width: 52px; height: 52px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 900; font-size: 1.1rem; line-height: 1;
+      text-align: center;
+    }
+    .logo-text { line-height: 1.1; }
+    .logo-text strong { display: block; font-size: 1rem; color: var(--green); }
+    .logo-text span { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: var(--radius);
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-links a:hover { background: var(--gray-light); color: var(--green); }
+
+    .nav-actions { display: flex; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 20px;
+      border: none; border-radius: var(--radius);
+      font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-green { background: var(--green); color: var(--white); }
+    .btn-green:hover { background: var(--green-dark); }
+    .btn-orange { background: var(--orange); color: var(--white); }
+    .btn-orange:hover { background: var(--orange-dark); }
+    .btn-outline { background: transparent; color: var(--green); border: 2px solid var(--green); }
+    .btn-outline:hover { background: var(--green); color: var(--white); }
+
+    /* hamburger */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; transition: 0.3s; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 50%, #0d3d22 100%);
+      color: var(--white);
+      padding: 72px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; max-width: 720px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(232,98,26,0.9);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+    .hero h1 span { color: #ffcc88; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-lg { padding: 14px 32px; font-size: 1.05rem; border-radius: 8px; }
+
+    /* ── MISSION BANNER ── */
+    .mission-banner {
+      background: var(--orange);
+      color: white;
+      text-align: center;
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .mission-banner span { font-weight: 400; opacity: 0.9; }
+
+    /* ── ACTION CARDS ── */
+    .action-section {
+      background: var(--gray-light);
+      padding: 56px 24px;
+    }
+    .section-label {
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--green-dark);
+      margin-bottom: 40px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 32px 24px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+    .card-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 18px;
+    }
+    .card-icon.green { background: #d4eddf; }
+    .card-icon.orange { background: #fde8d8; }
+    .card-icon.blue { background: #d8eaf5; }
+    .card h3 { font-size: 1.15rem; font-weight: 700; color: var(--green-dark); margin-bottom: 10px; }
+    .card p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; margin-bottom: 20px; }
+
+    /* ── STATS ── */
+    .stats-section {
+      background: var(--green);
+      color: white;
+      padding: 56px 24px;
+      text-align: center;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .stat-num { font-size: 2.8rem; font-weight: 900; color: #ffcc88; line-height: 1; }
+    .stat-label { font-size: 0.95rem; opacity: 0.85; margin-top: 6px; }
+
+    /* ── FEATURED NEWS ── */
+    .news-section { padding: 56px 24px; }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .news-card { border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); background: white; }
+    .news-img {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .news-img.img1 { background: linear-gradient(135deg, #1a6b3c, #2d9e62); }
+    .news-img.img2 { background: linear-gradient(135deg, #e8621a, #f5921a); }
+    .news-img.img3 { background: linear-gradient(135deg, #1a4f8b, #2d78c8); }
+    .news-body { padding: 20px; }
+    .news-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .news-body h4 { font-size: 1rem; font-weight: 700; color: var(--green-dark); margin-bottom: 8px; line-height: 1.3; }
+    .news-body p { font-size: 0.86rem; color: var(--gray); line-height: 1.55; margin-bottom: 14px; }
+    .news-body a { color: var(--green); font-weight: 700; font-size: 0.86rem; text-decoration: none; }
+    .news-body a:hover { text-decoration: underline; }
+
+    /* ── CONTACT / MAP ── */
+    .contact-section {
+      background: var(--gray-light);
+      padding: 56px 24px;
+    }
+    .contact-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .contact-details h3 { font-size: 1.3rem; font-weight: 800; color: var(--green-dark); margin-bottom: 20px; }
+    .contact-item {
+      display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start;
+    }
+    .contact-item .icon {
+      width: 42px; height: 42px; border-radius: 8px;
+      background: var(--green); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-item .info strong { display: block; font-size: 0.85rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .contact-item .info span { font-size: 0.95rem; color: var(--text); font-weight: 600; }
+    .map-placeholder {
+      background: #d0e8d8;
+      border-radius: 12px;
+      height: 260px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 1rem;
+      border: 2px dashed #8cbc9e;
+    }
+    .map-placeholder .pin { font-size: 2.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      color: #cde8d7;
+      padding: 40px 24px 20px;
+    }
+    .footer-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px; padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    footer h4 { color: white; font-size: 0.95rem; margin-bottom: 14px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 8px; }
+    footer ul li a { color: #9ecfb0; text-decoration: none; font-size: 0.88rem; }
+    footer ul li a:hover { color: white; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.6; margin-top: 8px; opacity: 0.8; }
+    .footer-bottom { text-align: center; padding-top: 20px; font-size: 0.8rem; opacity: 0.6; }
+
+    /* ── SPANISH HIDDEN ── */
+    [data-es] { display: none; }
+    body.es [data-en] { display: none; }
+    body.es [data-es] { display: revert; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: block; }
+      nav.open .nav-links, nav.open .nav-actions {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: white; padding: 16px 24px;
+        box-shadow: var(--shadow);
+        align-items: flex-start; gap: 8px;
+        z-index: 99;
+      }
+      nav { flex-wrap: wrap; position: relative; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .utility-bar { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── UTILITY BAR ── -->
+<div class="utility-bar">
+  <div class="contact-info">
+    <a href="#">📞 (915) 298-0353</a>
+    <a href="#">📍 9541 Plaza Cir, El Paso, TX 79927</a>
+    <a href="#">✉️ Email Us</a>
+    <span class="hours">Food Distribution: Open Tuesday @ 9AM</span>
+  </div>
+  <div class="lang-toggle">
+    <button class="active" id="btn-en" onclick="setLang('en')">English</button>
+    <button id="btn-es" onclick="setLang('es')">Español</button>
+  </div>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <a href="#" class="logo">
+    <div class="logo-icon">EPFH</div>
+    <div class="logo-text">
+      <strong>El Pasoans Fighting Hunger</strong>
+      <span>Food Bank · Feeding America</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#" data-en>About Us</a><a href="#" data-es>Sobre Nosotros</a></li>
+    <li><a href="#" data-en>Fighting Hunger</a><a href="#" data-es>Combatir el Hambre</a></li>
+    <li><a href="#" data-en>Get Involved</a><a href="#" data-es>Participar</a></li>
+    <li><a href="#" data-en>Programs</a><a href="#" data-es>Programas</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <a href="#" class="btn btn-outline" data-en>Get Help</a>
+    <a href="#" class="btn btn-outline" data-es>Obtener Ayuda</a>
+    <a href="#" class="btn btn-orange" data-en>Donate</a>
+    <a href="#" class="btn btn-orange" data-es>Donar</a>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-badge" data-en>Serving El Paso Since 1978</span>
+    <span class="hero-badge" data-es>Sirviendo a El Paso Desde 1978</span>
+
+    <h1 data-en>No One in El Paso <span>Should Go Hungry.</span></h1>
+    <h1 data-es>Nadie en El Paso <span>Debe Pasar Hambre.</span></h1>
+
+    <p data-en>We provide food assistance, community programs, and resources to families across the El Paso region. Find help near you today.</p>
+    <p data-es>Ofrecemos asistencia alimentaria, programas comunitarios y recursos para familias en toda la región de El Paso. Encuentra ayuda cerca hoy.</p>
+  </div>
+</section>
+
+<!-- ── MISSION BANNER ── -->
+<div class="mission-banner">
+  <strong data-en>Our mission</strong><span data-en> is to combat hunger in our area… because no one should go hungry.</span>
+  <strong data-es>Nuestra misión</strong><span data-es> es combatir el hambre en nuestra área… porque nadie debería pasar hambre.</span>
+</div>
+
+<!-- ── ACTION CARDS ── -->
+<section class="action-section">
+  <p class="section-label" data-en>How Can We Help?</p>
+  <p class="section-label" data-es>¿Cómo Podemos Ayudar?</p>
+  <h2 class="section-title" data-en>Take Action Today</h2>
+  <h2 class="section-title" data-es>Actúa Hoy</h2>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon green">🍽️</div>
+      <h3 data-en>Get Food Help</h3>
+      <h3 data-es>Obtener Ayuda Alimentaria</h3>
+      <p data-en>Find a pantry or distribution event near you. We serve families across El Paso every week.</p>
+      <p data-es>Encuentra una despensa o evento de distribución cerca de ti. Servimos a familias en El Paso cada semana.</p>
+      <a href="#" class="btn btn-green" data-en>Find Food Near Me</a>
+      <a href="#" class="btn btn-green" data-es>Encontrar Comida</a>
+    </div>
+    <div class="card">
+      <div class="card-icon orange">🤝</div>
+      <h3 data-en>Volunteer</h3>
+      <h3 data-es>Voluntariado</h3>
+      <p data-en>Give your time to help sort, pack, and distribute food to families who need it most.</p>
+      <p data-es>Dona tu tiempo para ayudar a clasificar, empacar y distribuir alimentos a las familias que más lo necesitan.</p>
+      <a href="#" class="btn btn-orange" data-en>Sign Up to Volunteer</a>
+      <a href="#" class="btn btn-orange" data-es>Inscribirse</a>
+    </div>
+    <div class="card">
+      <div class="card-icon blue">💛</div>
+      <h3 data-en>Donate</h3>
+      <h3 data-es>Donar</h3>
+      <p data-en>Every $1 donated helps provide up to 3 meals. Your gift makes a direct impact on hunger in El Paso.</p>
+      <p data-es>Cada $1 donado ayuda a proporcionar hasta 3 comidas. Tu donación tiene un impacto directo.</p>
+      <a href="#" class="btn btn-green" data-en>Donate Now</a>
+      <a href="#" class="btn btn-green" data-es>Donar Ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<section class="stats-section">
+  <p class="section-label" style="color:#ffcc88;" data-en>Our Impact</p>
+  <p class="section-label" style="color:#ffcc88;" data-es>Nuestro Impacto</p>
+  <h2 class="section-title" style="color:white;margin-bottom:40px;" data-en>Fighting Hunger Together</h2>
+  <h2 class="section-title" style="color:white;margin-bottom:40px;" data-es>Combatiendo el Hambre Juntos</h2>
+  <div class="stats-grid">
+    <div>
+      <div class="stat-num">40M+</div>
+      <div class="stat-label" data-en>Pounds of food distributed annually</div>
+      <div class="stat-label" data-es>Libras de comida distribuidas al año</div>
+    </div>
+    <div>
+      <div class="stat-num">1 in 5</div>
+      <div class="stat-label" data-en>El Pasoans face food insecurity</div>
+      <div class="stat-label" data-es>Personas en El Paso con inseguridad alimentaria</div>
+    </div>
+    <div>
+      <div class="stat-num">200+</div>
+      <div class="stat-label" data-en>Partner agencies & pantries</div>
+      <div class="stat-label" data-es>Agencias asociadas y despensas</div>
+    </div>
+    <div>
+      <div class="stat-num">46yrs</div>
+      <div class="stat-label" data-en>Serving El Paso families</div>
+      <div class="stat-label" data-es>Sirviendo a familias de El Paso</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURED NEWS ── -->
+<section class="news-section">
+  <p class="section-label" data-en>Latest News</p>
+  <p class="section-label" data-es>Últimas Noticias</p>
+  <h2 class="section-title" data-en>Stay Informed</h2>
+  <h2 class="section-title" data-es>Mantente Informado</h2>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-img img1">📬</div>
+      <div class="news-body">
+        <span class="news-tag" data-en>Event</span>
+        <span class="news-tag" data-es>Evento</span>
+        <h4 data-en>We Need 100 Volunteers for Stamp Out Hunger</h4>
+        <h4 data-es>Necesitamos 100 Voluntarios para Stamp Out Hunger</h4>
+        <p data-en>Join us Saturday, May 9th for the annual food drive. Sign up today and help make a difference.</p>
+        <p data-es>Únase el sábado 9 de mayo para la colecta anual de alimentos. Regístrese hoy.</p>
+        <a href="#" data-en>Read More →</a>
+        <a href="#" data-es>Leer Más →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img img2">🥫</div>
+      <div class="news-body">
+        <span class="news-tag" data-en>Campaign</span>
+        <span class="news-tag" data-es>Campaña</span>
+        <h4 data-en>Stock the Shelves for El Paso Families</h4>
+        <h4 data-es>Abastece los Estantes para Familias de El Paso</h4>
+        <p data-en>Help us prepare for the 2026 summer hunger season. Every donation counts for local families.</p>
+        <p data-es>Ayúdanos a prepararnos para la temporada de hambre de verano 2026.</p>
+        <a href="#" data-en>Read More →</a>
+        <a href="#" data-es>Leer Más →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img img3">🥣</div>
+      <div class="news-body">
+        <span class="news-tag" data-en>Partnership</span>
+        <span class="news-tag" data-es>Asociación</span>
+        <h4 data-en>2026 Healthy Over Hungry Cereal Drive</h4>
+        <h4 data-es>Colecta de Cereales Saludables 2026</h4>
+        <p data-en>Presented with The Hospitals of Providence — help us collect cereal to nourish our community.</p>
+        <p data-es>Presentado con los Hospitales de Providence — ayúdanos a recolectar cereales.</p>
+        <a href="#" data-en>Read More →</a>
+        <a href="#" data-es>Leer Más →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact-section">
+  <p class="section-label" data-en>Find Us</p>
+  <p class="section-label" data-es>Encuéntranos</p>
+  <h2 class="section-title" data-en>Contact & Location</h2>
+  <h2 class="section-title" data-es>Contacto y Ubicación</h2>
+  <div class="contact-inner">
+    <div class="contact-details">
+      <h3 data-en>We're Here to Help</h3>
+      <h3 data-es>Estamos Aquí para Ayudar</h3>
+      <div class="contact-item">
+        <div class="icon">📞</div>
+        <div class="info">
+          <strong data-en>Phone</strong><strong data-es>Teléfono</strong>
+          <span>(915) 298-0353</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">📍</div>
+        <div class="info">
+          <strong data-en>Address</strong><strong data-es>Dirección</strong>
+          <span>9541 Plaza Cir, El Paso, TX 79927</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🕐</div>
+        <div class="info">
+          <strong data-en>Distribution Hours</strong><strong data-es>Horario de Distribución</strong>
+          <span data-en>Tuesdays @ 9:00 AM</span>
+          <span data-es>Martes a las 9:00 AM</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">✉️</div>
+        <div class="info">
+          <strong data-en>Email</strong><strong data-es>Correo</strong>
+          <span data-en>Use contact form on site</span>
+          <span data-es>Use el formulario de contacto</span>
+        </div>
+      </div>
+      <br>
+      <a href="#" class="btn btn-green" data-en>🗺 View Distribution Map</a>
+      <a href="#" class="btn btn-green" data-es>🗺 Ver Mapa de Distribución</a>
+    </div>
+    <div class="map-placeholder">
+      <span class="pin">📍</span>
+      <span data-en>Interactive Map</span>
+      <span data-es>Mapa Interactivo</span>
+      <small style="opacity:0.6;font-size:0.78rem;" data-en>9541 Plaza Cir · El Paso, TX</small>
+      <small style="opacity:0.6;font-size:0.78rem;" data-es>9541 Plaza Cir · El Paso, TX</small>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h4>El Pasoans Fighting Hunger</h4>
+      <p data-en>Fighting hunger in El Paso since 1978. A proud member of the Feeding America network.</p>
+      <p data-es>Combatiendo el hambre en El Paso desde 1978. Miembro orgulloso de la red Feeding America.</p>
+    </div>
+    <div>
+      <h4 data-en>Quick Links</h4>
+      <h4 data-es>Acceso Rápido</h4>
+      <ul>
+        <li><a href="#" data-en>Get Help</a><a href="#" data-es>Obtener Ayuda</a></li>
+        <li><a href="#" data-en>Donate</a><a href="#" data-es>Donar</a></li>
+        <li><a href="#" data-en>Volunteer</a><a href="#" data-es>Voluntariado</a></li>
+        <li><a href="#" data-en>Distribution Map</a><a href="#" data-es>Mapa de Distribución</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en>About</h4>
+      <h4 data-es>Acerca de</h4>
+      <ul>
+        <li><a href="#" data-en>Our Mission</a><a href="#" data-es>Nuestra Misión</a></li>
+        <li><a href="#" data-en>Programs</a><a href="#" data-es>Programas</a></li>
+        <li><a href="#" data-en>Partner Agencies</a><a href="#" data-es>Agencias Asociadas</a></li>
+        <li><a href="#" data-en>News</a><a href="#" data-es>Noticias</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en>Contact</h4>
+      <h4 data-es>Contacto</h4>
+      <ul>
+        <li><a href="#">(915) 298-0353</a></li>
+        <li><a href="#" data-en>Email Us</a><a href="#" data-es>Escríbenos</a></li>
+        <li><a href="#">9541 Plaza Cir<br>El Paso, TX 79927</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-en>© 2026 El Pasoans Fighting Hunger Food Bank. All rights reserved.</span>
+    <span data-es>© 2026 El Pasoans Fighting Hunger Food Bank. Todos los derechos reservados.</span>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.classList.toggle('es', lang === 'es');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  }
+  function toggleMenu() {
+    document.getElementById('navbar').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
