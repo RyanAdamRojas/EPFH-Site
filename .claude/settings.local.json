@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:elpasoansfightinghunger.org)"
+      "WebFetch(domain:elpasoansfightinghunger.org)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "WebFetch(domain:www.elpasoansfightinghunger.org)",
+      "Bash(pdftoppm -png -r 150 -f 1 -l 1 \"/Users/ryanadamrojas/Desktop/El Pasoans Fighting Hunger Food Bank - …because no one should go hungry.pdf\" /Users/ryanadamrojas/Documents/GitHub/EPFH-Site/report-assets/live-site)",
+      "Bash(pdftoppm -png -r 150 -f 1 -l 1 \"/Users/ryanadamrojas/Desktop/Revamp.pdf\" /Users/ryanadamrojas/Documents/GitHub/EPFH-Site/report-assets/revamp)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/ryanadamrojas/Documents/GitHub/EPFH-Site/report-assets/live-site-1.png /Users/ryanadamrojas/Documents/GitHub/EPFH-Site/report-assets/revamp-1.png)",
+      "Bash(convert live-site-1.png -resize 900x full-live-site.png)",
+      "Bash(convert revamp-1.png -resize 900x full-revamp.png)",
+      "Bash(convert live-site-1.png -crop 3544x1800+0+0 +repage -resize 900x navbar-hero-live.png)",
+      "Bash(convert revamp-1.png -crop 3544x1600+0+0 +repage -resize 900x navbar-hero-revamp.png)",
+      "Bash(convert revamp-1.png -crop 3544x2000+0+1600 +repage -resize 900x action-cards-revamp.png)",
+      "Bash(magick ../epfhfb_logo_4_white.png -background \"#134f2d\" -flatten -resize x200 logo-wordmark-preview.png)",
+      "Bash(magick ../epfhfb_logo_4_white_star.png -background \"#134f2d\" -flatten -resize x200 logo-star-preview.png)"
     ]
   }
 }
