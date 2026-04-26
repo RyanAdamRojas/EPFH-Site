@@ -296,7 +296,9 @@
     .card .btn { margin-top: auto; }
 
     /* ── SPONSORSHIPS ── */
-    .sponsorship-section {
+    .sponsorship-section,
+    .news-section,
+    .contact-section {
       background: var(--gray-light);
       padding: 56px 24px;
     }
@@ -356,6 +358,9 @@
     .stats-section {
       padding: 72px 24px;
     }
+    .stats-section .section-title {
+      color: var(--white);
+    }
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -364,10 +369,9 @@
       margin: 0 auto;
     }
     .stat-num { font-size: 2.8rem; font-weight: 900; color: #ffcc88; line-height: 1; }
-    .stat-label { font-size: 0.95rem; opacity: 0.85; margin-top: 6px; }
+    .stat-label { font-size: 0.95rem; color: var(--white); opacity: 0.85; margin-top: 6px; }
 
     /* ── FEATURED NEWS ── */
-    .news-section { padding: 56px 24px; }
     .news-carousel-shell {
       max-width: 1280px;
       margin: 0 auto;
@@ -515,10 +519,6 @@
     .news-body a:hover { text-decoration: underline; }
 
     /* ── CONTACT / MAP ── */
-    .contact-section {
-      background: var(--gray-light);
-      padding: 56px 24px;
-    }
     .contact-inner {
       max-width: 900px;
       margin: 0 auto;
@@ -868,8 +868,8 @@
 <!-- ── STATS ── -->
 <section class="stats-section patterned-gradient-section">
   <div class="stats-content">
-    <h2 class="section-title" style="color:white;margin-bottom:40px;" data-en>Our Operations</h2>
-    <h2 class="section-title" style="color:white;margin-bottom:40px;" data-es>Nuestras Operaciones</h2>
+    <h2 class="section-title" style="margin-bottom:40px;" data-en>Our Operations</h2>
+    <h2 class="section-title" style="margin-bottom:40px;" data-es>Nuestras Operaciones</h2>
     <div class="stats-grid">
       <div>
         <div class="stat-num">112M+ lbs</div>
@@ -925,11 +925,7 @@
         <p data-en>Join us for Stamp Out Hunger 2026. Sign up today and help us bring our community together.</p>
         <p data-es>Únete a Stamp Out Hunger 2026. Regístrate hoy y ayúdanos a unir a nuestra comunidad.</p>
         <div class="news-meta">
-          <span>📅 Apr 17, 2026</span>
-          <span> / </span>
-          <span>f</span>
-          <span> / </span>
-          <span>t</span>
+          <span>Apr 17, 2026</span>
         </div>
         <a href="#" data-en>Read More →</a>
         <a href="#" data-es>Leer Más →</a>
@@ -947,11 +943,7 @@
         <p data-en>Help us stock the shelves this summer and feed families across our community.</p>
         <p data-es>Ayúdanos a llenar los estantes este verano y alimentar a las familias de nuestra comunidad.</p>
         <div class="news-meta">
-          <span>📅 Apr 16, 2026</span>
-          <span> / </span>
-          <span>f</span>
-          <span> / </span>
-          <span>t</span>
+          <span>Apr 16, 2026</span>
         </div>
         <a href="#" data-en>Read More →</a>
         <a href="#" data-es>Leer Más →</a>
@@ -969,11 +961,7 @@
         <p data-en>Presented in partnership with The Hospitals of Providence to help collect cereal and fight hunger.</p>
         <p data-es>Presentado en colaboración con The Hospitals of Providence para recolectar cereal y combatir el hambre.</p>
         <div class="news-meta">
-          <span>📅 Mar 26, 2026</span>
-          <span> / </span>
-          <span>f</span>
-          <span> / </span>
-          <span>t</span>
+          <span>Mar 26, 2026</span>
         </div>
         <a href="#" data-en>Read More →</a>
         <a href="#" data-es>Leer Más →</a>
@@ -991,11 +979,7 @@
         <p data-en>Hunger Warriors power our work every day. Join the monthly giving community and make an impact.</p>
         <p data-es>Los Hunger Warriors impulsan nuestro trabajo todos los días. Únete a la comunidad de donantes mensuales y genera impacto.</p>
         <div class="news-meta">
-          <span>📅 Mar 20, 2026</span>
-          <span> / </span>
-          <span>f</span>
-          <span> / </span>
-          <span>t</span>
+          <span>Mar 20, 2026</span>
         </div>
         <a href="#" data-en>Read More →</a>
         <a href="#" data-es>Leer Más →</a>
@@ -1013,11 +997,7 @@
         <p data-en>All Elite Wrestling star Thunder Rosa visited El Pasoans Fighting Hunger Food Bank to personally thank volunteers.</p>
         <p data-es>La estrella de All Elite Wrestling, Thunder Rosa, visitó El Pasoans Fighting Hunger Food Bank para agradecer personalmente a los voluntarios.</p>
         <div class="news-meta">
-          <span>📅 Mar 03, 2026</span>
-          <span> / </span>
-          <span>f</span>
-          <span> / </span>
-          <span>t</span>
+          <span>Mar 03, 2026</span>
         </div>
         <a href="#" data-en>Read More →</a>
         <a href="#" data-es>Leer Más →</a>
@@ -1035,11 +1015,7 @@
         <p data-en>Food Fight heats up at The Outlet Shoppes. Every bite gives back, and every plate helps El Paso.</p>
         <p data-es>Food Fight se enciende en The Outlet Shoppes. Cada bocado devuelve algo y cada plato ayuda a El Paso.</p>
         <div class="news-meta">
-          <span>📅 Feb 04, 2026</span>
-          <span> / </span>
-          <span>f</span>
-          <span> / </span>
-          <span>t</span>
+          <span>Feb 04, 2026</span>
         </div>
         <a href="#" data-en>Read More →</a>
         <a href="#" data-es>Leer Más →</a>
