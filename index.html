@@ -48,53 +48,64 @@
       display: flex;
       background: rgba(255,255,255,0.15);
       border-radius: 20px;
+      padding: 2px;
       overflow: hidden;
     }
     .lang-toggle button {
       background: none;
       border: none;
       color: #cde8d7;
-      padding: 4px 14px;
+      padding: 3px 14px;
       font-size: 0.82rem;
+      line-height: 1.2;
       cursor: pointer;
       font-weight: 600;
-      transition: background 0.2s, color 0.2s;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     }
     .lang-toggle button.active {
-      background: var(--orange);
-      color: var(--white);
+      background: #ffcc88;
+      color: var(--green-dark);
       border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.14);
     }
     .lang-toggle button:hover:not(.active) { color: var(--white); }
 
     /* ── NAVBAR ── */
     nav {
-      background: var(--white);
+      background: var(--green-dark);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 14px 24px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
       position: sticky;
       top: 0;
       z-index: 100;
     }
-    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .logo-icon {
-      width: 52px; height: 52px;
-      background: var(--green);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-weight: 900; font-size: 1.1rem; line-height: 1;
-      text-align: center;
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
     }
-    .logo-text { line-height: 1.1; }
-    .logo-text strong { display: block; font-size: 1rem; color: var(--green); }
-    .logo-text span { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    .logo img {
+      display: block;
+      width: auto;
+      height: auto;
+    }
+    .logo-mark {
+      width: 80px;
+      max-height: 40px;
+      object-fit: contain;
+    }
+    nav.mobile-scrolled {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
 
     .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
     .nav-links a {
-      color: var(--text);
+      color: var(--white);
       text-decoration: none;
       font-size: 0.88rem;
       font-weight: 600;
@@ -102,7 +113,7 @@
       border-radius: var(--radius);
       transition: background 0.15s, color 0.15s;
     }
-    .nav-links a:hover { background: var(--gray-light); color: var(--green); }
+    .nav-links a:hover { background: rgba(255,255,255,0.12); color: #ffcc88; }
 
     .nav-actions { display: flex; gap: 10px; }
     .btn {
@@ -118,56 +129,71 @@
     .btn-green:hover { background: var(--green-dark); }
     .btn-orange { background: var(--orange); color: var(--white); }
     .btn-orange:hover { background: var(--orange-dark); }
-    .btn-outline { background: transparent; color: var(--green); border: 2px solid var(--green); }
-    .btn-outline:hover { background: var(--green); color: var(--white); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.8); }
+    .btn-outline:hover { background: rgba(255,255,255,0.12); color: var(--white); border-color: var(--white); }
 
     /* hamburger */
     .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; transition: 0.3s; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); margin: 5px 0; border-radius: 2px; transition: 0.3s; }
 
     /* ── HERO ── */
-    .hero {
+    .patterned-gradient-section {
       background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 50%, #0d3d22 100%);
-      color: var(--white);
-      padding: 72px 24px;
-      text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
+    .patterned-gradient-section::before {
       content: '';
       position: absolute; inset: 0;
       background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
-    .hero-content { position: relative; max-width: 720px; margin: 0 auto; }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(232,98,26,0.9);
-      color: white;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin-bottom: 20px;
+    .hero {
+      color: var(--white);
+      min-height: 400px;
+      padding: 96px 24px 40px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background-image:
+        linear-gradient(rgba(11, 44, 25, 0.74), rgba(11, 44, 25, 0.68)),
+        url("banner3-snap.jpg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: flex-end;
     }
-    .hero h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
-    .hero h1 span { color: #ffcc88; }
-    .hero p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .hero-content {
+      position: relative;
+      max-width: 760px;
+      margin: 0 auto;
+      width: 100%;
+      padding-top: 64px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 18px;
+      max-width: none;
+      white-space: nowrap;
+      text-shadow: 0 6px 24px rgba(0, 0, 0, 0.55);
+    }
+    .hero h1[data-en] { color: var(--white); }
+    .hero h1 span { color: var(--white); }
+    .hero-line-break { display: inline; }
+    .hero p {
+      font-size: 1.02rem;
+      font-weight: 600;
+      opacity: 0.98;
+      line-height: 1.45;
+      margin-bottom: 36px;
+      max-width: 62ch;
+      text-shadow: 0 5px 20px rgba(0, 0, 0, 0.58);
+    }
     .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .btn-lg { padding: 14px 32px; font-size: 1.05rem; border-radius: 8px; }
-
-    /* ── MISSION BANNER ── */
-    .mission-banner {
-      background: var(--orange);
-      color: white;
-      text-align: center;
-      padding: 14px 24px;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-    .mission-banner span { font-weight: 400; opacity: 0.9; }
 
     /* ── ACTION CARDS ── */
     .action-section {
@@ -198,6 +224,9 @@
       margin: 0 auto;
     }
     .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       background: var(--white);
       border-radius: 12px;
       box-shadow: var(--shadow);
@@ -207,28 +236,129 @@
     }
     .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
     .card-icon {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem;
-      margin: 0 auto 18px;
+      display: block;
+      font-size: 2.8rem;
+      line-height: 1;
+      margin: 0 0 18px;
     }
-    .card-icon.green { background: #d4eddf; }
-    .card-icon.orange { background: #fde8d8; }
-    .card-icon.blue { background: #d8eaf5; }
     .card h3 { font-size: 1.15rem; font-weight: 700; color: var(--green-dark); margin-bottom: 10px; }
     .card p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; margin-bottom: 20px; }
+    .card p.card-impact-stat {
+      margin: 0 0 18px;
+      font-size: clamp(1.8rem, 4.6vw, 2.6rem);
+      font-weight: 800;
+      line-height: 0.92;
+      color: var(--gray);
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+    .card-body-centered {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .card-location-lines {
+      line-height: 1.5;
+    }
+    .card-location-lines span {
+      display: block;
+    }
+    .card-details {
+      width: 100%;
+      margin: 0 0 20px;
+      padding: 0;
+      list-style: none;
+      text-align: left;
+    }
+    .card-details li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(16, 78, 51, 0.12);
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .card-details li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+    .card-details-label {
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+    .card-details-value {
+      text-align: right;
+    }
+    .card .btn { margin-top: auto; }
+
+    /* ── SPONSORSHIPS ── */
+    .sponsorship-section {
+      background: var(--gray-light);
+      padding: 56px 24px;
+    }
+    .sponsorship-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .sponsorship-title {
+      text-align: center;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--green-dark);
+      margin-bottom: 40px;
+    }
+    .sponsorship-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+      align-items: stretch;
+    }
+    .sponsorship-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .sponsorship-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+    .sponsorship-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 18px;
+      border-radius: 8px;
+    }
+    .sponsorship-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 16px;
+    }
+    .sponsorship-card p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .sponsorship-card .btn {
+      margin-top: auto;
+      align-self: flex-start;
+    }
 
     /* ── STATS ── */
     .stats-section {
-      background: var(--green);
-      color: white;
-      padding: 56px 24px;
-      text-align: center;
+      padding: 72px 24px;
     }
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 32px;
       max-width: 900px;
       margin: 0 auto;
@@ -238,22 +368,85 @@
 
     /* ── FEATURED NEWS ── */
     .news-section { padding: 56px 24px; }
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      max-width: 1000px;
+    .news-carousel-shell {
+      max-width: 1280px;
       margin: 0 auto;
+      position: relative;
     }
-    .news-card { border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); background: white; }
+    .news-carousel-header {
+      text-align: center;
+      max-width: 920px;
+      margin: 0 auto 28px;
+    }
+    .news-carousel-header .section-title { margin-bottom: 14px; }
+    .news-carousel-header p {
+      font-size: 1rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+    .news-carousel-header a {
+      color: var(--green);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .news-carousel-header a:hover { text-decoration: underline; }
+    .news-carousel {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(280px, 1fr);
+      gap: 24px;
+      overflow-x: auto;
+      padding: 4px 4px 18px;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .news-carousel::-webkit-scrollbar { display: none; }
+    .news-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: white;
+      scroll-snap-align: start;
+      min-width: 280px;
+    }
     .news-img {
-      height: 160px;
-      display: flex; align-items: center; justify-content: center;
+      height: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 3rem;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
     }
+    .news-img::after {
+      content: 'Image placeholder';
+      position: absolute;
+      inset: auto 14px 14px auto;
+      background: rgba(0, 0, 0, 0.45);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+    .news-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .news-img.has-image::after { content: none; }
     .news-img.img1 { background: linear-gradient(135deg, #1a6b3c, #2d9e62); }
     .news-img.img2 { background: linear-gradient(135deg, #e8621a, #f5921a); }
     .news-img.img3 { background: linear-gradient(135deg, #1a4f8b, #2d78c8); }
+    .news-img.img4 { background: linear-gradient(135deg, #eb9a1e, #f5c242); }
+    .news-img.img5 { background: linear-gradient(135deg, #8d4a18, #d08a52); }
+    .news-img.img6 { background: linear-gradient(135deg, #0b7a3b, #18a85b); }
     .news-body { padding: 20px; }
     .news-tag {
       display: inline-block;
@@ -269,6 +462,55 @@
     }
     .news-body h4 { font-size: 1rem; font-weight: 700; color: var(--green-dark); margin-bottom: 8px; line-height: 1.3; }
     .news-body p { font-size: 0.86rem; color: var(--gray); line-height: 1.55; margin-bottom: 14px; }
+    .news-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 14px;
+    }
+    .news-meta span { display: inline-flex; align-items: center; gap: 4px; }
+    .news-carousel-controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+      align-items: center;
+    }
+    .news-carousel-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .carousel-button {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(26, 107, 60, 0.25);
+      background: white;
+      color: var(--green-dark);
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .carousel-button:hover { background: var(--gray-light); }
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(26, 107, 60, 0.25);
+      cursor: pointer;
+      padding: 0;
+    }
+    .carousel-dot.active { background: var(--green); }
     .news-body a { color: var(--green); font-weight: 700; font-size: 0.86rem; text-decoration: none; }
     .news-body a:hover { text-decoration: underline; }
 
@@ -287,16 +529,49 @@
     }
     .contact-details h3 { font-size: 1.3rem; font-weight: 800; color: var(--green-dark); margin-bottom: 20px; }
     .contact-item {
-      display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+      align-items: start;
     }
-    .contact-item .icon {
-      width: 42px; height: 42px; border-radius: 8px;
-      background: var(--green); color: white;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; flex-shrink: 0;
+    .contact-item .contact-emoji {
+      font-size: 2rem;
+      line-height: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 2px;
     }
-    .contact-item .info strong { display: block; font-size: 0.85rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
-    .contact-item .info span { font-size: 0.95rem; color: var(--text); font-weight: 600; }
+    .contact-item .info strong {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .contact-item .info span {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .contact-item .info input {
+      width: 100%;
+      max-width: 320px;
+      padding: 12px 14px;
+      border: 1px solid #c8d5cc;
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .contact-item .info input::placeholder {
+      color: #98a59d;
+    }
     .map-placeholder {
       background: #d0e8d8;
       border-radius: 12px;
@@ -307,12 +582,44 @@
       font-weight: 700;
       font-size: 1rem;
       border: 2px dashed #8cbc9e;
+      overflow: hidden;
+      position: relative;
     }
     .map-placeholder .pin { font-size: 2.5rem; }
+    .map-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .map-placeholder.has-map::before {
+      content: 'Interactive Map';
+      position: absolute;
+      inset: auto auto 14px 14px;
+      background: rgba(19, 79, 45, 0.82);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+    .map-placeholder.has-map::after {
+      content: '9541 Plaza Cir · El Paso, TX';
+      position: absolute;
+      inset: auto 14px 14px auto;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--green-dark);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.2px;
+      z-index: 1;
+    }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--green-dark);
       color: #cde8d7;
       padding: 40px 24px 20px;
     }
@@ -335,21 +642,83 @@
     body.es [data-en] { display: none; }
     body.es [data-es] { display: revert; }
 
+    @media (max-width: 960px) {
+      .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
-      .nav-links, .nav-actions { display: none; }
+      .nav-links { display: none; }
+      .nav-actions {
+        display: flex;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+        padding-top: 12px;
+      }
+      .nav-actions .btn {
+        flex: 1 1 0;
+        max-width: 180px;
+      }
       .hamburger { display: block; }
-      nav.open .nav-links, nav.open .nav-actions {
+      nav:not(.mobile-scrolled) {
+        padding-top: 14px;
+        padding-bottom: 14px;
+      }
+      nav.open .nav-links {
         display: flex; flex-direction: column;
         position: absolute; top: 100%; left: 0; right: 0;
-        background: white; padding: 16px 24px;
+        background: var(--green-dark); padding: 16px 24px;
         box-shadow: var(--shadow);
         align-items: flex-start; gap: 8px;
         z-index: 99;
       }
-      nav { flex-wrap: wrap; position: relative; }
+      nav {
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        row-gap: 8px;
+      }
+      .utility-bar {
+        font-size: 0.75rem;
+        justify-content: center;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .utility-bar .contact-info {
+        display: none;
+      }
+      .lang-toggle {
+        margin: 0 auto;
+      }
+      .logo {
+        order: 1;
+      }
+      .hamburger {
+        order: 2;
+        margin-left: auto;
+      }
+      .sponsorship-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
       .contact-inner { grid-template-columns: 1fr; }
-      .utility-bar { font-size: 0.75rem; }
+      .hero-line-break { display: block; }
+      .hero {
+        min-height: auto;
+        padding: 96px 24px 108px;
+        text-align: center;
+        display: block;
+      }
+      .hero-content { max-width: 560px; }
+      .hero h1,
+      .hero p {
+        max-width: none;
+      }
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
   </style>
 </head>
@@ -361,7 +730,7 @@
     <a href="#">📞 (915) 298-0353</a>
     <a href="#">📍 9541 Plaza Cir, El Paso, TX 79927</a>
     <a href="#">✉️ Email Us</a>
-    <span class="hours">Food Distribution: Open Tuesday @ 9AM</span>
+    <span class="hours">Closed Weekends. Open Tuesday @ 9AM</span>
   </div>
   <div class="lang-toggle">
     <button class="active" id="btn-en" onclick="setLang('en')">English</button>
@@ -372,18 +741,19 @@
 <!-- ── NAVBAR ── -->
 <nav id="navbar">
   <a href="#" class="logo">
-    <div class="logo-icon">EPFH</div>
-    <div class="logo-text">
-      <strong>El Pasoans Fighting Hunger</strong>
-      <span>Food Bank · Feeding America</span>
-    </div>
+    <img
+      id="navbar-logo"
+      class="logo-mark"
+      src="epfhfb_logo_4_white.png"
+      alt="El Pasoans Fighting Hunger logo"
+    >
   </a>
 
   <ul class="nav-links">
     <li><a href="#" data-en>About Us</a><a href="#" data-es>Sobre Nosotros</a></li>
     <li><a href="#" data-en>Fighting Hunger</a><a href="#" data-es>Combatir el Hambre</a></li>
-    <li><a href="#" data-en>Get Involved</a><a href="#" data-es>Participar</a></li>
-    <li><a href="#" data-en>Programs</a><a href="#" data-es>Programas</a></li>
+    <li><a href="#" data-en>Advocate</a><a href="#" data-es>Abogar</a></li>
+    <li><a href="#" data-en>Give Time</a><a href="#" data-es>Dar Tiempo</a></li>
   </ul>
 
   <div class="nav-actions">
@@ -401,201 +771,370 @@
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-content">
-    <span class="hero-badge" data-en>Serving El Paso Since 1978</span>
-    <span class="hero-badge" data-es>Sirviendo a El Paso Desde 1978</span>
+    <h1 data-en>No One Should Go Hungry</h1>
+    <h1 data-es><span>Nadie</span> en El Paso Debe Pasar Hambre.</h1>
 
-    <h1 data-en>No One in El Paso <span>Should Go Hungry.</span></h1>
-    <h1 data-es>Nadie en El Paso <span>Debe Pasar Hambre.</span></h1>
-
-    <p data-en>We provide food assistance, community programs, and resources to families across the El Paso region. Find help near you today.</p>
-    <p data-es>Ofrecemos asistencia alimentaria, programas comunitarios y recursos para familias en toda la región de El Paso. Encuentra ayuda cerca hoy.</p>
+    <p data-en>Our mission is to provide food assistance, community programs, and resources to families across El Paso, Hudspeth, and Culberson counties through community partners.</p>
+    <p data-es>Nuestra misión es brindar asistencia alimentaria, programas comunitarios y recursos a las familias de los condados de El Paso, Hudspeth y Culberson a través de socios comunitarios.</p>
   </div>
 </section>
 
-<!-- ── MISSION BANNER ── -->
-<div class="mission-banner">
-  <strong data-en>Our mission</strong><span data-en> is to combat hunger in our area… because no one should go hungry.</span>
-  <strong data-es>Nuestra misión</strong><span data-es> es combatir el hambre en nuestra área… porque nadie debería pasar hambre.</span>
-</div>
-
 <!-- ── ACTION CARDS ── -->
 <section class="action-section">
-  <p class="section-label" data-en>How Can We Help?</p>
-  <p class="section-label" data-es>¿Cómo Podemos Ayudar?</p>
   <h2 class="section-title" data-en>Take Action Today</h2>
   <h2 class="section-title" data-es>Actúa Hoy</h2>
 
   <div class="cards-grid">
     <div class="card">
       <div class="card-icon green">🍽️</div>
-      <h3 data-en>Get Food Help</h3>
+      <h3 data-en>Get Help</h3>
       <h3 data-es>Obtener Ayuda Alimentaria</h3>
-      <p data-en>Find a pantry or distribution event near you. We serve families across El Paso every week.</p>
-      <p data-es>Encuentra una despensa o evento de distribución cerca de ti. Servimos a familias en El Paso cada semana.</p>
-      <a href="#" class="btn btn-green" data-en>Find Food Near Me</a>
-      <a href="#" class="btn btn-green" data-es>Encontrar Comida</a>
+      <p class="card-location-lines" data-en>Find a pantry or food distribution site in:<span>El Paso County</span><span>Hudspeth County</span><span>Culberson County</span></p>
+      <p class="card-location-lines" data-es>Encuentra una despensa o sitio de distribución de alimentos en:<span>Condado de El Paso</span><span>Condado de Hudspeth</span><span>Condado de Culberson</span></p>
+      <a href="#" class="btn btn-orange" data-en>Find Food Near Me</a>
+      <a href="#" class="btn btn-orange" data-es>Encontrar Comida</a>
     </div>
     <div class="card">
       <div class="card-icon orange">🤝</div>
       <h3 data-en>Volunteer</h3>
       <h3 data-es>Voluntariado</h3>
-      <p data-en>Give your time to help sort, pack, and distribute food to families who need it most.</p>
-      <p data-es>Dona tu tiempo para ayudar a clasificar, empacar y distribuir alimentos a las familias que más lo necesitan.</p>
-      <a href="#" class="btn btn-orange" data-en>Sign Up to Volunteer</a>
+      <ul class="card-details" data-en>
+        <li><span class="card-details-label">Days</span><span class="card-details-value">Tuesday - Saturday</span></li>
+        <li><span class="card-details-label">Morning Shift</span><span class="card-details-value">8am - 12pm</span></li>
+        <li><span class="card-details-label">Afternoon Shift</span><span class="card-details-value">12pm - 4pm</span></li>
+      </ul>
+      <ul class="card-details" data-es>
+        <li><span class="card-details-label">Días</span><span class="card-details-value">Martes - sábado</span></li>
+        <li><span class="card-details-label">Turno de la mañana</span><span class="card-details-value">8am - 12pm</span></li>
+        <li><span class="card-details-label">Turno de la tarde</span><span class="card-details-value">12pm - 4pm</span></li>
+      </ul>
+      <a href="#" class="btn btn-orange" data-en>Sign Up</a>
       <a href="#" class="btn btn-orange" data-es>Inscribirse</a>
     </div>
     <div class="card">
       <div class="card-icon blue">💛</div>
       <h3 data-en>Donate</h3>
       <h3 data-es>Donar</h3>
-      <p data-en>Every $1 donated helps provide up to 3 meals. Your gift makes a direct impact on hunger in El Paso.</p>
-      <p data-es>Cada $1 donado ayuda a proporcionar hasta 3 comidas. Tu donación tiene un impacto directo.</p>
-      <a href="#" class="btn btn-green" data-en>Donate Now</a>
-      <a href="#" class="btn btn-green" data-es>Donar Ahora</a>
+      <div class="card-body-centered">
+        <p class="card-impact-stat" data-en>$1 = 7 Meals</p>
+        <p class="card-impact-stat" data-es>$1 = 7 Comidas</p>
+      </div>
+      <a href="#" class="btn btn-orange" data-en>Donate Now</a>
+      <a href="#" class="btn btn-orange" data-es>Donar Ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── SPONSORSHIPS ── -->
+<section class="sponsorship-section">
+  <div class="sponsorship-inner">
+    <h2 class="sponsorship-title" data-en>Sponsorships</h2>
+    <h2 class="sponsorship-title" data-es>Patrocinios</h2>
+
+    <div class="sponsorship-grid">
+      <article class="sponsorship-card">
+        <img src="sponsor-elderly.jpg" alt="An elderly couple">
+        <h3 data-en>Feed the Elderly</h3>
+        <h3 data-es>Alimenta a los Adultos Mayores</h3>
+        <p data-en>Sponsor a weekly home delivery for one month for those who are homebound, including seniors or people with disabilities.</p>
+        <p data-es>Patrocina una entrega semanal a domicilio durante un mes para personas confinadas en casa, incluidos adultos mayores o personas con discapacidades.</p>
+        <a href="#" class="btn btn-orange btn-lg" data-en>Donate $90</a>
+        <a href="#" class="btn btn-orange btn-lg" data-es>Donar $90</a>
+      </article>
+
+      <article class="sponsorship-card">
+        <img src="sponsor-children.jpg" alt="A child holding a bowl">
+        <h3 data-en>Feed a Child</h3>
+        <h3 data-es>Alimenta a un Niño</h3>
+        <p data-en>Sponsor food for a child for a whole year and help provide reliable meals throughout the year.</p>
+        <p data-es>Patrocina comida para un niño durante todo un año y ayuda a proporcionar comidas confiables durante todo el año.</p>
+        <a href="#" class="btn btn-orange btn-lg" data-en>Donate $164</a>
+        <a href="#" class="btn btn-orange btn-lg" data-es>Donar $164</a>
+      </article>
+
+      <article class="sponsorship-card">
+        <img src="sponsor-family.jpg" alt="A family portrait">
+        <h3 data-en>Feed a Family</h3>
+        <h3 data-es>Alimenta a una Familia</h3>
+        <p data-en>Sponsor food for a family for the whole year and make a lasting difference in their daily lives.</p>
+        <p data-es>Patrocina comida para una familia durante todo un año y genera un cambio duradero en su vida diaria.</p>
+        <a href="#" class="btn btn-orange btn-lg" data-en>Donate $655</a>
+        <a href="#" class="btn btn-orange btn-lg" data-es>Donar $655</a>
+      </article>
     </div>
   </div>
 </section>
 
 <!-- ── STATS ── -->
-<section class="stats-section">
-  <p class="section-label" style="color:#ffcc88;" data-en>Our Impact</p>
-  <p class="section-label" style="color:#ffcc88;" data-es>Nuestro Impacto</p>
-  <h2 class="section-title" style="color:white;margin-bottom:40px;" data-en>Fighting Hunger Together</h2>
-  <h2 class="section-title" style="color:white;margin-bottom:40px;" data-es>Combatiendo el Hambre Juntos</h2>
-  <div class="stats-grid">
-    <div>
-      <div class="stat-num">40M+</div>
-      <div class="stat-label" data-en>Pounds of food distributed annually</div>
-      <div class="stat-label" data-es>Libras de comida distribuidas al año</div>
-    </div>
-    <div>
-      <div class="stat-num">1 in 5</div>
-      <div class="stat-label" data-en>El Pasoans face food insecurity</div>
-      <div class="stat-label" data-es>Personas en El Paso con inseguridad alimentaria</div>
-    </div>
-    <div>
-      <div class="stat-num">200+</div>
-      <div class="stat-label" data-en>Partner agencies & pantries</div>
-      <div class="stat-label" data-es>Agencias asociadas y despensas</div>
-    </div>
-    <div>
-      <div class="stat-num">46yrs</div>
-      <div class="stat-label" data-en>Serving El Paso families</div>
-      <div class="stat-label" data-es>Sirviendo a familias de El Paso</div>
+<section class="stats-section patterned-gradient-section">
+  <div class="stats-content">
+    <h2 class="section-title" style="color:white;margin-bottom:40px;" data-en>Our Operations</h2>
+    <h2 class="section-title" style="color:white;margin-bottom:40px;" data-es>Nuestras Operaciones</h2>
+    <div class="stats-grid">
+      <div>
+        <div class="stat-num">112M+ lbs</div>
+        <div class="stat-label" data-en>of food donated to support our work across the region</div>
+        <div class="stat-label" data-es>de alimentos donados para respaldar nuestro trabajo en toda la región</div>
+      </div>
+      <div>
+        <div class="stat-num">55K+ hours</div>
+        <div class="stat-label" data-en>of volunteer time helped sort, pack, and distribute food</div>
+        <div class="stat-label" data-es>de voluntariado ayudaron a clasificar, empacar y distribuir alimentos</div>
+      </div>
+      <div>
+        <div class="stat-num">879 pantries</div>
+        <div class="stat-label" data-en>mobile pantry distributions brought food closer to neighbors</div>
+        <div class="stat-label" data-es>despensas móviles acercaron alimentos a nuestros vecinos</div>
+      </div>
+      <div>
+        <div class="stat-num">116 partners</div>
+        <div class="stat-label" data-en>partner agencies helped distribute food throughout the community</div>
+        <div class="stat-label" data-es>agencias asociadas ayudaron a distribuir alimentos en toda la comunidad</div>
+      </div>
+      <div>
+        <div class="stat-num">96 team members</div>
+        <div class="stat-label" data-en>keep food bank operations moving every day</div>
+        <div class="stat-label" data-es>mantienen en marcha las operaciones del banco de alimentos cada día</div>
+      </div>
+      <div>
+        <div class="stat-num">1% overhead</div>
+        <div class="stat-label" data-en>helps keep 99.6% of expenses focused on programs</div>
+        <div class="stat-label" data-es>ayuda a mantener el 99.6% de los gastos enfocado en programas</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ── FEATURED NEWS ── -->
 <section class="news-section">
-  <p class="section-label" data-en>Latest News</p>
-  <p class="section-label" data-es>Últimas Noticias</p>
-  <h2 class="section-title" data-en>Stay Informed</h2>
-  <h2 class="section-title" data-es>Mantente Informado</h2>
-  <div class="news-grid">
+  <div class="news-carousel-shell">
+    <div class="news-carousel-header">
+      <h2 class="section-title" data-en>Latest News</h2>
+      <h2 class="section-title" data-es>Últimas Noticias</h2>
+    </div>
+    <div class="news-carousel" id="news-carousel" aria-label="Featured posts carousel">
     <div class="news-card">
-      <div class="news-img img1">📬</div>
+      <div class="news-img img6 has-image">
+        <img src="we-need-100-volunteers-for-stamp-out-hunger-59806-SOH-Website-Thumbnail-copy.png" alt="We Need 100 Volunteers for Stamp Out Hunger">
+      </div>
       <div class="news-body">
         <span class="news-tag" data-en>Event</span>
         <span class="news-tag" data-es>Evento</span>
         <h4 data-en>We Need 100 Volunteers for Stamp Out Hunger</h4>
-        <h4 data-es>Necesitamos 100 Voluntarios para Stamp Out Hunger</h4>
-        <p data-en>Join us Saturday, May 9th for the annual food drive. Sign up today and help make a difference.</p>
-        <p data-es>Únase el sábado 9 de mayo para la colecta anual de alimentos. Regístrese hoy.</p>
+        <h4 data-es>Necesitamos 100 voluntarios para Stamp Out Hunger</h4>
+        <p data-en>Join us for Stamp Out Hunger 2026. Sign up today and help us bring our community together.</p>
+        <p data-es>Únete a Stamp Out Hunger 2026. Regístrate hoy y ayúdanos a unir a nuestra comunidad.</p>
+        <div class="news-meta">
+          <span>📅 Apr 17, 2026</span>
+          <span> / </span>
+          <span>f</span>
+          <span> / </span>
+          <span>t</span>
+        </div>
         <a href="#" data-en>Read More →</a>
         <a href="#" data-es>Leer Más →</a>
       </div>
     </div>
     <div class="news-card">
-      <div class="news-img img2">🥫</div>
+      <div class="news-img img1 has-image">
+        <img src="stock-the-shelves-for-el-paso-families-43811-STS-Website-Thumbnail.png" alt="Stock the Shelves for El Paso Families">
+      </div>
       <div class="news-body">
         <span class="news-tag" data-en>Campaign</span>
         <span class="news-tag" data-es>Campaña</span>
         <h4 data-en>Stock the Shelves for El Paso Families</h4>
-        <h4 data-es>Abastece los Estantes para Familias de El Paso</h4>
-        <p data-en>Help us prepare for the 2026 summer hunger season. Every donation counts for local families.</p>
-        <p data-es>Ayúdanos a prepararnos para la temporada de hambre de verano 2026.</p>
+        <h4 data-es>Llena los Estantes para las Familias de El Paso</h4>
+        <p data-en>Help us stock the shelves this summer and feed families across our community.</p>
+        <p data-es>Ayúdanos a llenar los estantes este verano y alimentar a las familias de nuestra comunidad.</p>
+        <div class="news-meta">
+          <span>📅 Apr 16, 2026</span>
+          <span> / </span>
+          <span>f</span>
+          <span> / </span>
+          <span>t</span>
+        </div>
         <a href="#" data-en>Read More →</a>
         <a href="#" data-es>Leer Más →</a>
       </div>
     </div>
     <div class="news-card">
-      <div class="news-img img3">🥣</div>
+      <div class="news-img img2 has-image">
+        <img src="the-hospitals-of-providence-presents-the-healthy-over-hungry-cereal-drive-76835-Main-Page.png" alt="The Hospitals of Providence Presents the Healthy Over Hungry Cereal Drive">
+      </div>
       <div class="news-body">
         <span class="news-tag" data-en>Partnership</span>
         <span class="news-tag" data-es>Asociación</span>
-        <h4 data-en>2026 Healthy Over Hungry Cereal Drive</h4>
-        <h4 data-es>Colecta de Cereales Saludables 2026</h4>
-        <p data-en>Presented with The Hospitals of Providence — help us collect cereal to nourish our community.</p>
-        <p data-es>Presentado con los Hospitales de Providence — ayúdanos a recolectar cereales.</p>
+        <h4 data-en>The Hospitals of Providence Presents the Healthy Over Hungry Cereal Drive!</h4>
+        <h4 data-es>The Hospitals of Providence presenta la colecta Healthy Over Hungry de cereal</h4>
+        <p data-en>Presented in partnership with The Hospitals of Providence to help collect cereal and fight hunger.</p>
+        <p data-es>Presentado en colaboración con The Hospitals of Providence para recolectar cereal y combatir el hambre.</p>
+        <div class="news-meta">
+          <span>📅 Mar 26, 2026</span>
+          <span> / </span>
+          <span>f</span>
+          <span> / </span>
+          <span>t</span>
+        </div>
         <a href="#" data-en>Read More →</a>
         <a href="#" data-es>Leer Más →</a>
       </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img img3 has-image">
+        <img src="join-the-lucha-become-a-hunger-warrior-48279-Website-Thumbnail.png" alt="Join the Lucha - Become a Hunger Warrior">
+      </div>
+      <div class="news-body">
+        <span class="news-tag" data-en>Giving</span>
+        <span class="news-tag" data-es>Donación</span>
+        <h4 data-en>Join the Lucha - Become a Hunger Warrior</h4>
+        <h4 data-es>Únete a la lucha - Conviértete en un Hunger Warrior</h4>
+        <p data-en>Hunger Warriors power our work every day. Join the monthly giving community and make an impact.</p>
+        <p data-es>Los Hunger Warriors impulsan nuestro trabajo todos los días. Únete a la comunidad de donantes mensuales y genera impacto.</p>
+        <div class="news-meta">
+          <span>📅 Mar 20, 2026</span>
+          <span> / </span>
+          <span>f</span>
+          <span> / </span>
+          <span>t</span>
+        </div>
+        <a href="#" data-en>Read More →</a>
+        <a href="#" data-es>Leer Más →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img img4 has-image">
+        <img src="thunder-rosa-visits-to-thank-volunteers-and-support-neighbors-00591-DSC06735.png" alt="Thunder Rosa Visits to Thank Volunteers and Support Neighbors">
+      </div>
+      <div class="news-body">
+        <span class="news-tag" data-en>Event</span>
+        <span class="news-tag" data-es>Evento</span>
+        <h4 data-en>Thunder Rosa Visits to Thank Volunteers and Support Neighbors</h4>
+        <h4 data-es>Thunder Rosa visita para agradecer a voluntarios y apoyar a los vecinos</h4>
+        <p data-en>All Elite Wrestling star Thunder Rosa visited El Pasoans Fighting Hunger Food Bank to personally thank volunteers.</p>
+        <p data-es>La estrella de All Elite Wrestling, Thunder Rosa, visitó El Pasoans Fighting Hunger Food Bank para agradecer personalmente a los voluntarios.</p>
+        <div class="news-meta">
+          <span>📅 Mar 03, 2026</span>
+          <span> / </span>
+          <span>f</span>
+          <span> / </span>
+          <span>t</span>
+        </div>
+        <a href="#" data-en>Read More →</a>
+        <a href="#" data-es>Leer Más →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img img5 has-image">
+        <img src="the-outlet-shoppes-host-food-fight-94246-WomanEatingInADiner.png" alt="The Outlet Shoppes Host Food Fight">
+      </div>
+      <div class="news-body">
+        <span class="news-tag" data-en>Event</span>
+        <span class="news-tag" data-es>Evento</span>
+        <h4 data-en>The Outlet Shoppes Host Food Fight</h4>
+        <h4 data-es>The Outlet Shoppes presenta Food Fight</h4>
+        <p data-en>Food Fight heats up at The Outlet Shoppes. Every bite gives back, and every plate helps El Paso.</p>
+        <p data-es>Food Fight se enciende en The Outlet Shoppes. Cada bocado devuelve algo y cada plato ayuda a El Paso.</p>
+        <div class="news-meta">
+          <span>📅 Feb 04, 2026</span>
+          <span> / </span>
+          <span>f</span>
+          <span> / </span>
+          <span>t</span>
+        </div>
+        <a href="#" data-en>Read More →</a>
+        <a href="#" data-es>Leer Más →</a>
+      </div>
+    </div>
+    </div>
+    <div class="news-carousel-controls">
+      <div class="news-carousel-buttons">
+        <button class="carousel-button" type="button" id="news-prev" aria-label="Previous posts">‹</button>
+        <button class="carousel-button" type="button" id="news-next" aria-label="Next posts">›</button>
+      </div>
+      <div class="carousel-dots" id="news-dots" aria-label="Carousel pagination"></div>
     </div>
   </div>
 </section>
 
 <!-- ── CONTACT ── -->
 <section class="contact-section">
-  <p class="section-label" data-en>Find Us</p>
-  <p class="section-label" data-es>Encuéntranos</p>
-  <h2 class="section-title" data-en>Contact & Location</h2>
-  <h2 class="section-title" data-es>Contacto y Ubicación</h2>
+  <h2 class="section-title" data-en>Find Us</h2>
+  <h2 class="section-title" data-es>Encuéntranos</h2>
   <div class="contact-inner">
     <div class="contact-details">
       <h3 data-en>We're Here to Help</h3>
       <h3 data-es>Estamos Aquí para Ayudar</h3>
       <div class="contact-item">
-        <div class="icon">📞</div>
+        <div class="contact-emoji" aria-hidden="true">📞</div>
         <div class="info">
-          <strong data-en>Phone</strong><strong data-es>Teléfono</strong>
-          <span>(915) 298-0353</span>
+          <div data-en>
+            <strong>Phone</strong>
+            <span>(915) 298-0353</span>
+          </div>
+          <div data-es>
+            <strong>Teléfono</strong>
+            <span>(915) 298-0353</span>
+          </div>
         </div>
       </div>
       <div class="contact-item">
-        <div class="icon">📍</div>
+        <div class="contact-emoji" aria-hidden="true">📍</div>
         <div class="info">
-          <strong data-en>Address</strong><strong data-es>Dirección</strong>
-          <span>9541 Plaza Cir, El Paso, TX 79927</span>
+          <div data-en>
+            <strong>Address</strong>
+            <span>9541 Plaza Cir, El Paso, TX 79927</span>
+          </div>
+          <div data-es>
+            <strong>Dirección</strong>
+            <span>9541 Plaza Cir, El Paso, TX 79927</span>
+          </div>
         </div>
       </div>
       <div class="contact-item">
-        <div class="icon">🕐</div>
+        <div class="contact-emoji" aria-hidden="true">🕐</div>
         <div class="info">
-          <strong data-en>Distribution Hours</strong><strong data-es>Horario de Distribución</strong>
-          <span data-en>Tuesdays @ 9:00 AM</span>
-          <span data-es>Martes a las 9:00 AM</span>
+          <div data-en>
+            <strong>Distribution Hours</strong>
+            <span>Tue-Fri: 9:00 AM - 4:00 PM</span>
+            <span>Office Hours: 8:00 AM - 5:00 PM</span>
+          </div>
+          <div data-es>
+            <strong>Horario de Distribución</strong>
+            <span>Mar-Vie: 9:00 AM - 4:00 PM</span>
+            <span>Horario de oficina: 8:00 AM - 5:00 PM</span>
+          </div>
         </div>
       </div>
       <div class="contact-item">
-        <div class="icon">✉️</div>
+        <div class="contact-emoji" aria-hidden="true">✉️</div>
         <div class="info">
-          <strong data-en>Email</strong><strong data-es>Correo</strong>
-          <span data-en>Use contact form on site</span>
-          <span data-es>Use el formulario de contacto</span>
+          <div data-en>
+            <strong>Stay Up To Date</strong>
+            <input type="email" placeholder="Enter Your Email Address" aria-label="Enter Your Email Address">
+          </div>
+          <div data-es>
+            <strong>Mantente al Día</strong>
+            <input type="email" placeholder="Ingresa tu correo electrónico" aria-label="Ingresa tu correo electrónico">
+          </div>
         </div>
       </div>
       <br>
-      <a href="#" class="btn btn-green" data-en>🗺 View Distribution Map</a>
-      <a href="#" class="btn btn-green" data-es>🗺 Ver Mapa de Distribución</a>
+      <a href="#" class="btn btn-green" data-en>Find Food Near Me</a>
+      <a href="#" class="btn btn-green" data-es>Encontrar Comida Cerca de Mí</a>
     </div>
-    <div class="map-placeholder">
-      <span class="pin">📍</span>
-      <span data-en>Interactive Map</span>
-      <span data-es>Mapa Interactivo</span>
-      <small style="opacity:0.6;font-size:0.78rem;" data-en>9541 Plaza Cir · El Paso, TX</small>
-      <small style="opacity:0.6;font-size:0.78rem;" data-es>9541 Plaza Cir · El Paso, TX</small>
+    <div class="map-placeholder has-map">
+      <img src="map-of-el-paso.png" alt="Map of El Paso">
     </div>
   </div>
 </section>
 
 <!-- ── FOOTER ── -->
-<footer>
+<footer class="patterned-gradient-section">
   <div class="footer-inner">
     <div class="footer-brand">
       <h4>El Pasoans Fighting Hunger</h4>
-      <p data-en>Fighting hunger in El Paso since 1978. A proud member of the Feeding America network.</p>
-      <p data-es>Combatiendo el hambre en El Paso desde 1978. Miembro orgulloso de la red Feeding America.</p>
+      <p data-en>Because no one should go hungry. A proud member of the Feeding America network.</p>
+      <p data-es>Porque nadie debe pasar hambre. Miembro orgulloso de la red Feeding America.</p>
     </div>
     <div>
       <h4 data-en>Quick Links</h4>
@@ -628,20 +1167,95 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span data-en>© 2026 El Pasoans Fighting Hunger Food Bank. All rights reserved.</span>
-    <span data-es>© 2026 El Pasoans Fighting Hunger Food Bank. Todos los derechos reservados.</span>
+    <span data-en>This Institution is an equal opportunity provider.</span>
+    <span data-es>Esta institución es un proveedor de igualdad de oportunidades.</span>
   </div>
 </footer>
 
 <script>
+  const navbar = document.getElementById('navbar');
+  const navbarLogo = document.getElementById('navbar-logo');
+  const desktopLogo = 'epfhfb_logo_4_white.png';
+  const mobileLogo = 'epfhfb_logo_4_white_star.png';
+  const newsCarousel = document.getElementById('news-carousel');
+  const newsPrev = document.getElementById('news-prev');
+  const newsNext = document.getElementById('news-next');
+  const newsDots = document.getElementById('news-dots');
+  const newsCards = newsCarousel ? Array.from(newsCarousel.querySelectorAll('.news-card')) : [];
+  let activeNewsIndex = 0;
+
   function setLang(lang) {
     document.body.classList.toggle('es', lang === 'es');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     document.getElementById('btn-es').classList.toggle('active', lang === 'es');
   }
   function toggleMenu() {
-    document.getElementById('navbar').classList.toggle('open');
+    navbar.classList.toggle('open');
   }
+  function updateNavbarLogo() {
+    const useCollapsedLogo = window.scrollY > 0;
+
+    navbar.classList.toggle('mobile-scrolled', useCollapsedLogo);
+    navbarLogo.src = useCollapsedLogo ? mobileLogo : desktopLogo;
+    navbarLogo.alt = useCollapsedLogo
+      ? 'El Pasoans Fighting Hunger star logo'
+      : 'El Pasoans Fighting Hunger logo';
+  }
+  function updateNewsDots() {
+    if (!newsDots) return;
+
+    newsDots.innerHTML = '';
+    newsCards.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = `carousel-dot${index === activeNewsIndex ? ' active' : ''}`;
+      dot.setAttribute('aria-label', `Go to featured post ${index + 1}`);
+      dot.addEventListener('click', () => scrollToNewsCard(index));
+      newsDots.appendChild(dot);
+    });
+  }
+  function scrollToNewsCard(index) {
+    if (!newsCarousel || !newsCards.length) return;
+
+    const safeIndex = Math.max(0, Math.min(index, newsCards.length - 1));
+    activeNewsIndex = safeIndex;
+    newsCarousel.scrollTo({
+      left: newsCards[safeIndex].offsetLeft - newsCarousel.offsetLeft,
+      behavior: 'smooth',
+    });
+    updateNewsDots();
+  }
+  function moveNewsCarousel(direction) {
+    scrollToNewsCard(activeNewsIndex + direction);
+  }
+
+  window.addEventListener('scroll', updateNavbarLogo, { passive: true });
+  window.addEventListener('resize', updateNavbarLogo);
+  newsPrev?.addEventListener('click', () => moveNewsCarousel(-1));
+  newsNext?.addEventListener('click', () => moveNewsCarousel(1));
+  newsCarousel?.addEventListener('scroll', () => {
+    if (!newsCards.length) return;
+
+    const currentOffset = newsCarousel.scrollLeft;
+    let nearestIndex = 0;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+
+    newsCards.forEach((card, index) => {
+      const cardOffset = card.offsetLeft - newsCarousel.offsetLeft;
+      const distance = Math.abs(cardOffset - currentOffset);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = index;
+      }
+    });
+
+    if (nearestIndex !== activeNewsIndex) {
+      activeNewsIndex = nearestIndex;
+      updateNewsDots();
+    }
+  }, { passive: true });
+  updateNavbarLogo();
+  updateNewsDots();
 </script>
 </body>
 </html>
